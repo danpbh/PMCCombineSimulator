@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "PUp1pQS10bzNAK5Mf8VIo+HLyhJGQmCx/vhVC61ZB8DSRy4lUHnZBTgo744qMx2CKWI6eomPn7QkYxabLwyQuw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ltdan\\source\\repos\\PMC Combine Simulation\\PMC Combine Simulation.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ltdan\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.21\\microsoft.netcore.app.host.win-x64.3.1.21.nupkg.sha512"
+  ],
+  "logs": []
+}

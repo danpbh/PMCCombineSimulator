@@ -1,0 +1,14 @@
+C:\Users\ltdan\source\repos\PMC Combine Simulation\bin\Debug\netcoreapp3.1\PMC Combine Simulation.exe
+C:\Users\ltdan\source\repos\PMC Combine Simulation\bin\Debug\netcoreapp3.1\PMC Combine Simulation.deps.json
+C:\Users\ltdan\source\repos\PMC Combine Simulation\bin\Debug\netcoreapp3.1\PMC Combine Simulation.runtimeconfig.json
+C:\Users\ltdan\source\repos\PMC Combine Simulation\bin\Debug\netcoreapp3.1\PMC Combine Simulation.runtimeconfig.dev.json
+C:\Users\ltdan\source\repos\PMC Combine Simulation\bin\Debug\netcoreapp3.1\PMC Combine Simulation.dll
+C:\Users\ltdan\source\repos\PMC Combine Simulation\bin\Debug\netcoreapp3.1\PMC Combine Simulation.pdb
+C:\Users\ltdan\source\repos\PMC Combine Simulation\obj\Debug\netcoreapp3.1\PMC Combine Simulation.AssemblyInfoInputs.cache
+C:\Users\ltdan\source\repos\PMC Combine Simulation\obj\Debug\netcoreapp3.1\PMC Combine Simulation.AssemblyInfo.cs
+C:\Users\ltdan\source\repos\PMC Combine Simulation\obj\Debug\netcoreapp3.1\PMC Combine Simulation.csproj.CoreCompileInputs.cache
+C:\Users\ltdan\source\repos\PMC Combine Simulation\obj\Debug\netcoreapp3.1\PMC Combine Simulation.dll
+C:\Users\ltdan\source\repos\PMC Combine Simulation\obj\Debug\netcoreapp3.1\PMC Combine Simulation.pdb
+C:\Users\ltdan\source\repos\PMC Combine Simulation\obj\Debug\netcoreapp3.1\PMC Combine Simulation.genruntimeconfig.cache
+C:\Users\ltdan\source\repos\PMC Combine Simulation\obj\Debug\netcoreapp3.1\PMC Combine Simulation.csproj.AssemblyReference.cache
+C:\Users\ltdan\source\repos\PMC Combine Simulation\obj\Debug\netcoreapp3.1\PMC Combine Simulation.GeneratedMSBuildEditorConfig.editorconfig
