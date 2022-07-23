@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -12,12 +12,14 @@ namespace PMC_Combine_Simulation
 
         static void Main(string[] args)
         {
+
+            Program program = new Program();
             ArrayList rarePmcs = new ArrayList();
             ArrayList epicPmcs = new ArrayList();
             ArrayList legendPmcs = new ArrayList();
             ArrayList mythicPmcs = new ArrayList();
 
-            FillPMCType(rarePmcs, epicPmcs, legendPmcs, mythicPmcs);
+            program.FillPMCType(rarePmcs, epicPmcs, legendPmcs, mythicPmcs);
 
             int rareFailCombines = 0;
             int epicFailCombines = 0;
@@ -34,10 +36,10 @@ namespace PMC_Combine_Simulation
             Dictionary<int, object> lMap = new Dictionary<int, object>();
             Dictionary<int, object> mMap = new Dictionary<int, object>();
 
-           
 
-            
-            
+
+
+
             while (mMap.ContainsKey(0) == false) //Run while we do not have a Mythic PMC
             {
 
@@ -45,15 +47,16 @@ namespace PMC_Combine_Simulation
                 if (rareDuplicates == 3) //If we have 3 duplicate Rare PMC, run the combine.
                 {
                     rareDuplicates = 0;
-                    r = rnd.Next(10); //Get RNG value between 1 and 10
+                    r = rnd.Next(1, 11); //Get RNG value between 1 and 10
                     if (r == 10) //If RNG value is 10, perform successful combination (simulates the 1/10 chance)
                     {
-                        AcquireEpicPMC(epicPmcs, eMap, epicDuplicates);
+                        program.AcquireEpicPMC(ref epicPmcs, ref eMap, ref epicDuplicates);
+
                     }
 
                     else //Fail combination, 9/10 chance
                     {
-                        AcquireRarePMC(rarePmcs, rMap, rareDuplicates);
+                        program.AcquireRarePMC(ref rarePmcs, ref rMap, ref rareDuplicates);
                         rareFailCombines++; //Increment Rare Fails
                     }
                 }
@@ -61,7 +64,9 @@ namespace PMC_Combine_Simulation
                 //Pity Epic Check
                 if (rareFailCombines == 20) //Pity Epic
                 {
-                    AcquireEpicPMC(epicPmcs, eMap, epicDuplicates);
+                    Console.WriteLine("Rolling for Pity Epic...");
+                    program.AcquireEpicPMC(ref epicPmcs, ref eMap, ref epicDuplicates);
+                    Console.WriteLine("Rare Fail Combines reset to 0.");
                     rareFailCombines = 0; //Reset to 0;
                 }
 
@@ -69,26 +74,28 @@ namespace PMC_Combine_Simulation
                 //Duplicate Epic Check
                 if (epicDuplicates == 3) //If we have 3 duplicate Epic PMC, run the combine.
                 {
-
-                    r = rnd.Next(10); //Get RNG value between 1 and 10
-                    if (r == 10) //If RNG value is 10, perform successful combination (simulates the 1/10 chance)
+                    epicDuplicates = 0;
+                    r = rnd.Next(1, 11); //Get RNG value between 1 and 10
+                    if (r == 11) //If RNG value is 10, perform successful combination (simulates the 1/10 chance)
                     {
-                        AcquireLegendaryPMC(legendPmcs, lMap, legendDuplicates);
+                        program.AcquireLegendaryPMC(ref legendPmcs, ref lMap, ref legendDuplicates);
                     }
 
                     else //Fail combination, 9/10 chance
                     {
-                        AcquireEpicPMC(epicPmcs, eMap, epicDuplicates);
+                        program.AcquireEpicPMC(ref epicPmcs, ref eMap, ref epicDuplicates);
                         epicFailCombines++; //Increment Epic Fails
                     }
 
-                    epicDuplicates = 0;
+
                 }
 
                 //Pity Legendary Check
                 if (epicFailCombines == 20) //Pity Legendary
                 {
-                    AcquireLegendaryPMC(legendPmcs, lMap, legendDuplicates);
+                    Console.WriteLine("Rolling for Pity Legendary...");
+                    program.AcquireLegendaryPMC(ref legendPmcs, ref lMap, ref legendDuplicates);
+                    Console.WriteLine("Epic Fail Combines reset to 0.");
                     epicFailCombines = 0; //Reset to 0;
                 }
 
@@ -100,86 +107,102 @@ namespace PMC_Combine_Simulation
                 //Duplicate Legendary Check
                 if (legendDuplicates == 3) //If we have 3 duplicate Legendary, run the combine.
                 {
-                    
-                    r = rnd.Next(10); //Get RNG value between 1 and 10
+                    legendDuplicates = 0;
+                    r = rnd.Next(1, 11); //Get RNG value between 1 and 10
                     if (r == 10) //If RNG value is 10, perform successful combination (simulates the 1/10 chance)
                     {
-                        AcquireMythicPMC(mythicPmcs, mMap);
+                        program.AcquireMythicPMC(ref mythicPmcs, ref mMap);
+                        Console.WriteLine("Congratulations! You have acquired Mythic PMC: " + mMap[r]);
                         break;
                     }
 
-                    legendDuplicates = 0;
+                    else //Fail combination, 9/10 chance
+                    {
+
+                        program.AcquireLegendaryPMC(ref legendPmcs, ref lMap, ref legendDuplicates);
+                        legendFailCombines++; //Increment Legendary Fails
+                        Console.WriteLine("Shoot! You failed a Legendary Combine. Fail Count: " + legendFailCombines);
+                    }
                 }
 
-                else //Fail combination, 9/10 chance
-                {
-                    AcquireLegendaryPMC(legendPmcs, lMap, legendDuplicates);
-                    legendFailCombines++; //Increment Legendary Fails
-                }
-                
+
+
 
                 //Pity Mythic Check
                 if (legendFailCombines == 5) //Pity Mythic
                 {
-                    AcquireMythicPMC(mythicPmcs, mMap);
+                    Console.WriteLine("Rolling for Pity Legendary... How Unlucky");
+                    program.AcquireMythicPMC(ref mythicPmcs, ref mMap);
+                    Console.WriteLine("You have acquired Mythic PMC: " + mMap[r] + " from pity...");
+                    Console.WriteLine("Legendary Fail Combines reset to 0.");
                     legendFailCombines = 0; //Reset to 0;
                     break;
                 }
 
 
                 //Add Rare PMC
-                AcquireRarePMC(rarePmcs, rMap, rareDuplicates);
+                program.AcquireRarePMC(ref rarePmcs, ref rMap, ref rareDuplicates);
                 rarePmcUsed++;
+
+
             }
             //Print how many Rare PMC used to acquire Mythic
-            Console.WriteLine(rarePmcUsed);
+            Console.WriteLine("It took " + rarePmcUsed + " Rare PMC to acquire your Mythic!");
         }
 
-        
 
-        public static void AcquireRarePMC (ArrayList rarePmcs, Dictionary<int, object> rMap, int rareDuplicates)
+
+        public void AcquireRarePMC(ref ArrayList rarePmcs, ref Dictionary<int, object> rMap, ref int rareDuplicates)
         {
             r = rnd.Next(rarePmcs.Count);
             if (rMap.ContainsKey(r))
             {
+
                 rareDuplicates++;
+
             }
             else
             {
                 rMap.Add(r, rarePmcs[r]);
+                Console.WriteLine("New Rare!");
             }
         }
 
-        public static void AcquireEpicPMC(ArrayList epicPmcs, Dictionary<int, object> eMap, int epicDuplicates)
+        public void AcquireEpicPMC(ref ArrayList epicPmcs, ref Dictionary<int, object> eMap, ref int epicDuplicates)
         {
             r = rnd.Next(epicPmcs.Count);
             if (eMap.ContainsKey(r))
             {
                 epicDuplicates++;
+
             }
             else
             {
                 eMap.Add(r, epicPmcs[r]);
+                Console.WriteLine("New Epic!");
             }
         }
 
-        public static void AcquireLegendaryPMC (ArrayList legendPmcs, Dictionary<int, object> lMap, int legendDuplicates)
+        public void AcquireLegendaryPMC(ref ArrayList legendPmcs, ref Dictionary<int, object> lMap, ref int legendDuplicates)
         {
             r = rnd.Next(legendPmcs.Count);
             if (lMap.ContainsKey(r))
             {
                 legendDuplicates++;
+                Console.WriteLine("Duplicate Legendary Acquired. Duplicate Legendary Count: " + legendDuplicates);
             }
             else
             {
                 lMap.Add(r, legendPmcs[r]);
+                Console.WriteLine("New Legendary!");
             }
         }
 
-        public static void AcquireMythicPMC(ArrayList mythicPmcs, Dictionary<int, object> mMap)
+        public void AcquireMythicPMC(ref ArrayList mythicPmcs, ref Dictionary<int, object> mMap)
         {
             r = rnd.Next(mythicPmcs.Count); //Since there are only one of each mythic, we do not need to check 
             mMap.Add(r, mythicPmcs[r]);     //for an existing one. We just add the one from the list.
+
         }
 
 
@@ -187,7 +210,7 @@ namespace PMC_Combine_Simulation
 
 
 
-        public static void FillPMCType (ArrayList rarePmcs, ArrayList epicPmcs, ArrayList legendPmcs, ArrayList mythicPmcs)
+        public void FillPMCType(ArrayList rarePmcs, ArrayList epicPmcs, ArrayList legendPmcs, ArrayList mythicPmcs)
         {
             rarePmcs.Add("Ann");
             rarePmcs.Add("Cobalt");
